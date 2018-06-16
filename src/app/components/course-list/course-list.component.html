@@ -1,0 +1,31 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Quản lý khóa học</h3>
+  </div>
+  <div class="panel-body">
+    <button type="button" class="btn btn-success" [routerLink]="['/courses/add']">Thêm khóa học</button>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tên khóa học</th>
+          <th>Miêu tả</th>
+          <th>Phí</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses, let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{course.name}}</td>
+          <td>{{course.description}}</td>
+          <td>{{course.fee > 0 ? (course.fee | currency :'USD') : "FREE"}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" [routerLink]="['/courses', course.id, 'edit']">Sửa</button>
+            <button type="button" class="btn btn-danger" (click)="onDeleteCourse(course.id)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
