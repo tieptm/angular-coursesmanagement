@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,11 +14,12 @@ import { CoursesComponent } from './components/courses/courses.component';
 import { CourseService } from './services/course.service';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const appRoutes : Routes = [
   {
     path : '',
-    component : HomeComponent
+    component : LoginComponent
   },
   {
     path : 'courses',
@@ -52,13 +54,15 @@ const appRoutes : Routes = [
     CourseAddComponent,
     CourseEditComponent,
     CoursesComponent,
-    LoginComponent
+    LoginComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [
     CourseService,

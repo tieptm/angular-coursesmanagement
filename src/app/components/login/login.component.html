@@ -1,30 +1,24 @@
 <div class="row">
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    <form>
-      <legend>Đăng nhập</legend>
+  <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <h1>Đăng nhập</h1>
+      <hr>
       <div class="form-group">
-        <label for="">Tài khoản</label>
-        <input type="text" class="form-control" #username>
+        <label>Tài khoản</label>
+        <input type="text" class="form-control" formControlName="username">
+        <span class="label label-danger" *ngIf="loginForm.controls.username.invalid && (loginForm.controls.username.dirty || loginForm.controls.username.touched)">Tài khoản không được để trống</span>
       </div>
       <div class="form-group">
-        <label for="">Mật khẩu</label>
-        <input type="password" class="form-control" #password>
+        <label>Mật khẩu</label>
+        <input type="password" class="form-control" formControlName="password">
+        <span class="label label-danger" *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">Mật khẩu không được để trống</span>
       </div>
-    
-      <button type="submit" class="btn btn-primary" (click)="onLogin(username.value, password.value)">Đăng nhập</button>
+      <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-lg btn-block">Đăng nhập</button>
     </form>
-  </div>
-  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     <div class="alert alert-danger" *ngIf="error == -1">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>Thông báo!!! </strong>
-      <br>
-      Tài khoản hoặc mật khẩu không chính xác
+      <strong>Thông báo!!!</strong>
+      <br> Tài khoản hoặc mật khẩu không chính xác
     </div>
   </div>
 </div>
-
-
-
-

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public error : number = 0;
+  public loginForm : FormGroup;
+  public user: User
+
 
   constructor(
-    public router : Router
-  ) { }
+    private router : Router,
+    private fb: FormBuilder
+  ) { 
+    this.loginForm = this.fb.group({
+      username:  ['',  [Validators.required]],
+      password: ['',  [Validators.required]]
+    });
+  }
 
   ngOnInit() {
     this.checkLogin();
@@ -29,7 +40,7 @@ export class LoginComponent implements OnInit {
       username : username,
       password : password
     }
-    if(username == 'admin' && password == 'admin'){
+    if(this.loginForm.value.username == 'admin' && this.loginForm.value.password == 'admin') {
       localStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['courses']);
     }
