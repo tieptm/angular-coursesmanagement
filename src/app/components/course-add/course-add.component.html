@@ -1,18 +1,22 @@
-<form>
+<form [formGroup]="courseAddForm" (ngSubmit)="onAddCourse()">
   <div class="col-md-8 col-md-offset-2">
     <legend>Thêm khóa học</legend>
     <div class="form-group">
       <label for="">Tên khóa học</label>
-      <input type="text" class="form-control" [(ngModel)]="course.name" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" formControlName="name">
+      <span class="label label-danger" *ngIf="courseAddForm.controls.name.invalid && (courseAddForm.controls.name.dirty || courseAddForm.controls.name.touched)">Tên khóa học không được để trống</span>
     </div>
     <div class="form-group">
       <label for="">Miêu tả</label>
-      <textarea class="form-control" [(ngModel)]="course.description" [ngModelOptions]="{standalone: true}"></textarea>
+      <textarea class="form-control" formControlName="description"></textarea>
+      <span class="label label-danger" *ngIf="courseAddForm.controls.description.invalid && (courseAddForm.controls.description.dirty || courseAddForm.controls.description.touched)">Miêu tả không được để trống</span>
+      <span class="label label-warning" *ngIf="courseAddForm.controls.description.errors?.minlength">Miêu tả không được nhỏ hơn 20 kí tự</span>
     </div>
     <div class="form-group">
       <label for="">Giá</label>
-      <input type="number" class="form-control" [(ngModel)]="course.fee" [ngModelOptions]="{standalone: true}">
+      <input type="number" class="form-control" formControlName="price">
+      <span class="label label-danger" *ngIf="courseAddForm.controls.price.invalid && (courseAddForm.controls.price.dirty || courseAddForm.controls.price.touched)">Miêu tả không được để trống</span>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="onAddCourse()">Lưu</button>
+    <button [disabled]="courseAddForm.invalid" type="submit" class="btn btn-primary">Lưu</button>
   </div>
 </form>

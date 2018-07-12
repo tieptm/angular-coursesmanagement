@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseService } from './../../services/course.service';
 import { Subscription } from 'rxjs';
 import { Course } from './../../models/course.model';
-import { FilterPipe } from './../../pipes/filter.pipe';
 
 @Component({
   selector: 'app-course-list',

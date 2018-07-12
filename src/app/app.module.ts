@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { CourseAddComponent } from './components/course-add/course-add.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
@@ -49,7 +48,6 @@ const appRoutes : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CourseListComponent,
     CourseAddComponent,
     CourseEditComponent,

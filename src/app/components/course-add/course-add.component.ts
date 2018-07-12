@@ -3,7 +3,7 @@ import { CourseService } from './../../services/course.service';
 import { Subscription } from 'rxjs';
 import { Course } from './../../models/course.model';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-course-add',
@@ -24,27 +24,28 @@ export class CourseAddComponent implements OnInit {
 
   ngOnInit() {
     this.course = new Course();
-    this.createForm();
+    this.courseAddForm = this.fb.group({
+      id: [this.course.id],
+      name: ['', Validators.required],
+      description: ['',[Validators.required, Validators.minLength(20)]],
+      price: ['', Validators.required]
+    });
   }
 
+  onAddCourse() {
+    this.subscription = this.courseService.addCourse(this.courseAddForm.value).subscribe(data => {
+      if(data && data.id) {
+        this.routerService.navigate(['courses']);
+      }
+      // console.log(this.courseAddForm.value);
+      // console.log(data);
+    });
+  }
+  
   ngOnDestroy() {
     if(this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  onAddCourse() {
-    this.subscription = this.courseService.addCourse(this.course).subscribe(data => {
-      if(data && data.id) {
-        this.routerService.navigate(['courses']);
-      }
-    });
-  }
-
-  createForm() {
-    this.courseAddForm = this.fb.group({
-      coursename: ['', Validators.required]
-    })
   }
 
 }

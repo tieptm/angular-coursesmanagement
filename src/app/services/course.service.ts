@@ -24,10 +24,11 @@ export class CourseService {
 
   updateCourse(course : Course) : Observable<Course> {
     return this.httpClient.put<Course>(`${this.API}/${course.id}`, course);
+    
   }
 
   deleteCourse(id : number) : Observable<Course> {
-    //return this.httpClient.delete(this.API + '/' + id);
+    // return this.httpClient.delete<Course>(this.API + '/' + id);
     return this.httpClient.delete<Course>(`${this.API}/${id}`);
   }
 }
